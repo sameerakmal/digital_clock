@@ -6,7 +6,6 @@ function updateClock(){
     let min = now.getMinutes().toString().padStart(2, "0");
     let sec = now.getSeconds().toString().padStart(2, "0");
     let ampm = "";
-    let displayHrs = hrs;
 
     const days = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -17,16 +16,19 @@ function updateClock(){
 
     if(!is24HourFormat){
         ampm = hrs >= 12 ? "PM" : "AM";
-        displayHrs = hrs % 12;
+        hrs = hrs % 12;
+        if (hrs === 0) {
+            hrs = 12;   
+        }
         document.getElementById("format").style.display = "block";
     }else{
         document.getElementById("format").style.display = "none"; 
     }
     
-    displayHrs = displayHrs.toString().padStart(2, "0");
+    hrs = hrs.toString().padStart(2, "0");
 
-    document.getElementById("hrs1").textContent = displayHrs[0];
-    document.getElementById("hrs2").textContent = displayHrs[1];
+    document.getElementById("hrs1").textContent = hrs[0];
+    document.getElementById("hrs2").textContent = hrs[1];
     document.getElementById("mins1").textContent = min[0];
     document.getElementById("mins2").textContent = min[1];
     document.getElementById("sec1").textContent = sec[0];
